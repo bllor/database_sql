@@ -1,0 +1,11 @@
+섹션2
+on update, on delete
+on update 
+- no action : 자식이 참조하고 있는 경우에 참조키를 변경할 수 없다.
+- cascade : 부모를 바꾸면 자식도 바뀜
+- set null : 부모를 바꾸면 참조하는 외래키를 바꾼다.
+
+on delete
+- restrict : 참조하면 변경할 수 없다.
+- cascade : 부모를 지울 경우 데이터와 자식의 데이터까지 사라진다.
+- set null : 번호가 지워진다.
