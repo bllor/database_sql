@@ -23,5 +23,44 @@ id같은 걸로 조회하는데, id <첫번째 데이터의 마지막번호 Limi
 --------------------------
 group by 그룹을 묶는다
 having group by에서 사용할 수 있는 where절
+group by할 때는 그룹으로 묶을 수 있는 애들이 있고, 묶을 수 없는 애들이 있다.
+이름 같은 것은 그룹으로 묶지 못하고, 팀 같은 것은 그룹으로 묶을 수 있듯이
+--------------------------
+join
+외래키로 연결된 테이블 2개를 합치는 과정
+a테이블과 b테이블이 id로 연결되어 있을 때
+select * from a inner join b on a.id = b.id
+inner join일 경우 두 테이블에 모두 일치하는 데이터만 출력
+left join일 경우 a의 모든 데이터는 출력하고 b의 데이터는 a와 일치하는 것만 출력
+right join일 경우 b와 일치하는 a의 데이터와 b의 모든 데이터를 출력
+outer join일 경우 a,b의 모든데이터를 출력
+
+full outer join - left, right조인을 합친것
+mysql에는 지원이 되지 않으므로
+(select * from a left join b on a.id = b.id)
+union
+(select * from a right join b on b a.id = b.id)
+left join, right join을 union으로 묶어서 출력한다.
+
+cross join
+select * from a join b
+a와 b의 모든 데이터를 연결지어서 출력한다.
+--------------------------
+index
+인덱스가 필요한 이유는 검색, 정렬할 때 성능을 높여준다.
+인덱스는 목차처럼 작용한다. --> 빠르게 찾거나 정렬할 수 있다.
+인덱스의 단점은 용량을 잡아 먹는다. --> 인덱스를 설정하면 해당 값에 대한 정보를 저장하므로 용량이 증가한다.
+인덱스는 검색을 많이하는 것으로 설정한다.
+primary key는 검색 때 많이 쓰이고, foreign key, unique key를 인덱스로 많이 사용된다.
+explain을 사용하면 쿼리성능, 인덱스 유무를 확인할 수 있다.
+type이 all일 경우 index를 사용하지 못하고 검색한다.
+index가 사용될 경우 possibility에 해당 인덱스의 이름이 나온다.
+복합키일 경우 첫번 째 키를 먼저 사용하고, 그 다음 두 번째 키로 사용한다.
+인덱스 번호 중 1순위인 애를 검색조건에 쓰지 않으면 해당 인덱스는 사용되지 않는다.
+
+*
+쿼리문에서 select는 제일 마지막에 실행이 된다.
+
+
 
 	
