@@ -1,0 +1,51 @@
+section4
+
+트랜잭션
+쿼리가 2개가 실행되어야 하는데 1개만 실행되고 나머지 1개는 실행되지 않을 경우, 이것을 rollback 해아한다.
+rollback할 때 사용하는것이 transaction
+
+start transaction
+
+sql
+
+rollback
+commit
+이런식으로 두어서 쿼리가 잘못될 경우 rollback을 하고 문제 없을 경우 commit을 하면된다.
+commit은 여러 번 눌러도 괜찮으므로 누른다
+대부분의 프레임워크들이 start transaction이 있으면 실행결과를 보고 commit 과 rollback을 자동으로 해준다.
+
+트랜잭션의 특성
+ACID
+atomicitiy 원자성 sql이 모두 다 성공하던지 다 실패하던지
+consistency 수행된 다음에 정상적인 데이터를 가지고 있어야 한다.
+isolation 트랜잭션과는 서로 영향을 주지 않는다.
+-->lock기능으로 인해서 트랜잭션끼리 영향을 주지 않는다.
+-->기능이 순차적으로 진행될 수 있게 도와준다.
+durability 트랜잭션이 성공하면 결과가 저장된다.
+
+isolation 수준
+read uncommitted
+read commited
+repeatable read
+serializable
+
+transaction은 innoDB만 지원하고, innoDB는 기본적으로 repeatable read를 이용한다.
+reapeatable read와 serializable이 거의 같다.
+
+잔고가 10만원이 있는데 a에게 7만원 b에게도 7만원을 보낸다고 했을 때,
+a에게 보내는 것을 실패했을 때 b에게 보낼 수 있다.
+하지만 순서가 꼬여서 커밋되지 않은 것을 a쪽에서 읽어서 보낼 수 없을 수도 있다.
+dirty read. --> 커밋되지 않은 걸을 읽은 것
+un-repeated read --> 커밋전에 읽고 커밋후에 값을 보여줘서 읽을 때와 보여줄 때의 값이 달라지는 경우
+lock은 commit이 된 다음 unlock이 된다.
+
+------------------------------------------------------
+stored Procedure
+매개변수를 이용하여 쿼리를 함수처럼 사용할 수 있다.
+
+------------------------------------------------------
+trigger
+어떤 쿼리가 실행되면 자동으로 다른 쿼리가 작동되게 만드는 것
+
+트리거를 사용할 때 old와 new를 사용할 수 있는데
+첫번째 쿼리가 실행된 다음의 값을 사용하고 싶을 때 new를 사용한다.
